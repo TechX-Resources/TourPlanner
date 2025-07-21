@@ -20,6 +20,95 @@
             "description": "The end date of the trip",
             "type": "string",
             "format": "date"
+        },
+        "cities":
+        {
+            "description": "The cities of the trip",
+            "type": "array",
+            "items":
+            {  
+                "type": "string",
+                "minimum": 1
+            }
+        },
+        "daily_plan":
+        {
+            "description": "details for each day of the trip",
+            "type": "array",
+            "items":
+            {
+                "type": "object",
+                "properties":
+                {
+                    "city":
+                    {
+                        "type": "string"
+                    },
+                    "country_code":
+                    {
+                        "type": "string"
+                    },
+                    "start_date_city":
+                    {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "end_date_city":
+                    {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "traveler_number":
+                    {
+                        "description": "The number of travelers",
+                        "type": "integer",
+                        "default": 1
+                    },
+                    "accomondation":
+                    {
+                        "description": "the accomodation user like to live in",
+                        "type": "object",
+                        "properties":
+                        {
+                            "room_type":
+                            {
+                                "type": "string",
+                                "default": "double",
+                                "enum": ["single", "double", "suite", "other"]
+                            },
+                            "accommodation_type":
+                            {
+                                "type":"string",
+                                "default": "hotel",
+                                "enum": ["hotel", "motel", "hostel", "Airbnb", "other"]
+                            },
+                            "hotel_accomodation_type":
+                            {
+                                "description": "whether the hotel accomodation type is default",
+                                "type": "boolean",
+                                "default": true
+                            },
+                            "hotel_rating":
+                            {
+                                "type": "integer",
+                                "default": "3",
+                                "enum": [1,2,3,4,5]
+                            },
+                            "default_rating":
+                            {
+                                "description": "whether the hotel rating is default",
+                                "type": "boolean",
+                                "default": true
+                            },
+                            "hotel_name":
+                            {
+                                "type": "string",
+                                "default": ""
+                            }
+                        }
+                    } 
+                }
+            }
         }
     },
     "required":["destination", "start_date","end_date"]

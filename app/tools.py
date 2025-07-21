@@ -1,8 +1,10 @@
 from langchain.tools import tool
-from prompt import prompt1
+from prompt import prompt1, prompt2
 import json
 from langchain.prompts import SystemMessagePromptTemplate, HumanMessagePromptTemplate, ChatPromptTemplate
 from datetime import date
+from llm import LLM
+
 
 def validate_user_input(llm, input_schema, user_input):
     """parse user input and validate it, return the parsed input if it is valid
@@ -50,8 +52,31 @@ def validate_user_input(llm, input_schema, user_input):
     else:
         return True, parsed_input["data"]
     
+def generate_plan(llm: LLM, user_input: str, parsed_input: dict, travel_info: dict):
 
+    #system prompt
+    system_prompt_template = SystemMessagePromptTemplate.from_template(prompt2)
+    #user prompt
+    user_prompt_template = HumanMessagePromptTemplate.from_template("{user_input}")
 
+    prompt = ChatPromptTemplate.from_messages([
+        system_prompt_template, 
+        user_prompt_template
+    ])
+    
+    chain = (
+        {   "parsed_input": lambda x: x["parsed_input"],
+            "travel_info": lambda x: x["travel_info"],
+            "user_input": lambda x: x["user_input"]
+        } 
+        | prompt 
+        | llm
+        | {"response": lambda x: x.content} #because prompt1 ask it to direcly only output in json
+    )
+    response = chain.invoke({"parsed_input": parsed_input, "travel_info": travel_info,"user_input": user_input})
+    
+    output = response["response"]
+    return output
 
     
 
