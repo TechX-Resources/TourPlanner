@@ -1,7 +1,18 @@
 
 
-"""this f unction is for proces hotel info from Liteapi travel"""
+
 def process_hotel_query_params(parsed_input, limit = 4, aiSearch = None):
+    """
+    This f unction is for proces hotel info from Liteapi travel
+
+    Args:
+        parsed_input: parsed user input
+        limit: number of hotel fetch for each city
+        aiSearch: additional requirement on hotel, such as hotel near shopping center
+
+    Return:
+        parameters for api call to fetch hotel information and a list of city
+    """
     #for each city traveled to, generate query to fetch hotel
     days = parsed_input["daily_plan"]
     list_params = []

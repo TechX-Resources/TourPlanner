@@ -41,18 +41,29 @@ def validate_user_input(llm, input_schema, user_input):
         } 
         | prompt 
         | llm
-        | {"response": lambda x: json.loads(x.content)} #because prompt1 ask it to direcly only output in json
+        | {"response": lambda x: x.content} #because prompt1 ask it to direcly only output in json
     )
-    response = chain.invoke({"schema_str": schema_str, "today_str": today_str, "user_input": user_input})
-    
-    parsed_input = response["response"]
+    response = chain.invoke({"schema_str": schema_str, "today_str": today_str,"user_input": user_input})
+    parsed_input = json.loads(response["response"])
 
     if parsed_input["data"] is None:
         return False, parsed_input["message"]
     else:
         return True, parsed_input["data"]
     
-def generate_plan(llm: LLM, user_input: str, parsed_input: dict, travel_info: dict):
+def generate_plan(llm: LLM, user_input: str, parsed_input: dict, travel_info: dict) -> str:
+    """
+    The function call LLM with collected travel_info and user input to generate a plan for user
+
+    Args:
+        llm: the llm connection
+        user_input: the user input
+        parsed_input: dictionary of parsed user input
+        travel_info: collected travel information
+
+    Return:
+        the generated plan for user
+    """
 
     #system prompt
     system_prompt_template = SystemMessagePromptTemplate.from_template(prompt2)

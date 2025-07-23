@@ -23,6 +23,7 @@ if __name__ == "__main__":
     validity = False
     #user input schema
     input_schema = "schemas/user_input_test.schema.json"
+    output_schema =  "schemas/parsed_user_input.schema.json"
     #user input string
     user_input = ""
 

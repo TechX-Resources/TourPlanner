@@ -1,0 +1,18 @@
+
+{
+    "$schema":"http://json-schema.org/draft-07/schema#",
+    "title": "Tour Planner Parsed User Input",
+    "properties": 
+    {
+        "message":
+        {
+            "description": "A confirmation message about the parsed input.",
+            "type": "string"
+        },
+        "data":
+        {
+            "description": "the parsed user input",
+            "type": "object"
+        }
+    }   
+}

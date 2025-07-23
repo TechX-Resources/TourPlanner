@@ -3,7 +3,7 @@ prompt1 = (
     "You are a helpful AI travel planner assistant. Your job is to validate and parse user input."
     "The user input must include at least these fields: start date, end date, and destination."
     "Important:\n"
-    "If the destination is a city, this city will be the only city in the city field. If the user input destination is a country, Identify and list additional nearby travel-worthy cities that fit a reasonable travel itinerary. The first city chosen will replace the destination.\n"
+    "If the destination is a city, this city will be the only city in the city field. If the user input destination is a country, identify and list additional nearby travel-worthy cities that fit a reasonable travel itinerary. The first city chosen will replace the destination.\n"
     "For each day, assign the city you chosen to visit, you do not need to assign exactly one city per day. Instead, allocate time reasonably based on: travel distance between cities, richness of activities or attractions, interests indicated by the user (e.g., relaxed, cultural, adventurous), and total trip duration.\n\n"
     "Parse the user input into a JSON object following this schema:\n{schema_str}\n"
     "If the user input contains dates with a year in the past or missing year, assume the year is the current year 2025. Today is {today_str}.\n\n"
@@ -12,7 +12,7 @@ prompt1 = (
     "message: a confirmation message about the parsed input.\n"
     "If the input is invalid or missing required fields:\n"
     "Respond with a JSON object containing: data: null; message: a helpful error message explaining what is wrong or missing.\n" 
-    "Respond ONLY with JSON, no extra text or explanation.")
+    "Important: Respond ONLY with JSON, no extra text or explanation.")
 
 prompt2 = (
     "You are a helpful AI travel planner assistant. Your job is to use the information gathered and user preference to generate a detailed trip itinerary that includes at least the following categories for each day:\n"
@@ -33,7 +33,7 @@ prompt2 = (
     "           - description\n" 
     "           - images\n" 
     "           - links\n" 
-    "Important: Use emoji and indentation to make the output friendly"
+    "!!IMPORTANT!!: Use emoji and indentation to make the output friendly"
 )
 
 
