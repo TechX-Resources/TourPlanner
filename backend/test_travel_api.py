@@ -1,4 +1,6 @@
-from travel_api import (Hotel_LiteAPI, Hotel_RapidAPI, Weather_OpenWeatherMap, Directions_OpenRouteService, FutureFlight_Aviationstack)
+from travel_api import (Directions_OpenRouteService,
+                        FutureFlight_Aviationstack, Hotel_LiteAPI,
+                        Hotel_RapidAPI, Weather_OpenWeatherMap)
 
 hotel_rapid = Hotel_RapidAPI("Hotel Rapid API")
 hotel_lite = Hotel_LiteAPI("Hotel Lite API","https://api.liteapi.travel")
@@ -15,10 +17,14 @@ def test_travel_apis():
     else:
         print("No hotel data returned.")
 
-    print("\n--- Testing Weather Forecast ---")
-    params_weather = {"city": "Paris"}
-    weather = weather_owp.get_weather_forecast(params_weather)
-    print(weather)
+    weather = Weather_OpenWeatherMap("WeatherTest")
+    params = {
+        "city": "Paris",
+        "date": "2025-08-02"
+    }
+    forecast = weather.get_weather_forecast(params)
+    print("\n--- Future Weather Forecast ---")
+    print(forecast)
 
     print("\n--- Testing Directions ---")
     params_direction = {"start_lon": 2.3522, "start_lat": 48.8566, "end_lon": 2.295, "end_lat": 48.8738}
